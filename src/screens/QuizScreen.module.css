@@ -1,0 +1,232 @@
+.wrapper {
+  animation: fadeUp 0.4s ease;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Header */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.counter {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.counter span {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.timerWrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  padding: 6px 14px;
+}
+
+.timerIcon { font-size: 14px; }
+
+.timerVal {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 700;
+  min-width: 20px;
+  text-align: center;
+  transition: color 0.3s;
+}
+
+.timerVal.danger  { color: var(--wrong); }
+.timerVal.warning { color: var(--gold); }
+
+/* Progress */
+.progressTrack {
+  height: 4px;
+  background: var(--border);
+  border-radius: 100px;
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+
+.progressFill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  border-radius: 100px;
+  transition: width 0.4s ease;
+}
+
+/* Badge */
+.badge {
+  display: inline-block;
+  padding: 4px 12px;
+  background: rgba(108, 99, 255, 0.15);
+  border: 1px solid rgba(108, 99, 255, 0.3);
+  border-radius: 100px;
+  font-size: 11px;
+  color: #a89cf7;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 16px;
+}
+
+/* Question */
+.question {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.45;
+  margin-bottom: 28px;
+  min-height: 80px;
+}
+
+/* Options */
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.optBtn {
+  width: 100%;
+  text-align: left;
+  padding: 15px 20px;
+  background: var(--surface2);
+  border: 1px solid var(--border2);
+  border-radius: 14px;
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.optBtn:not(:disabled):hover {
+  border-color: rgba(108, 99, 255, 0.5);
+  background: rgba(108, 99, 255, 0.07);
+  transform: translateX(4px);
+}
+
+.optBtn:not(:disabled):hover .letter {
+  background: var(--accent);
+}
+
+.optBtn:disabled {
+  cursor: default;
+}
+
+.optBtn.correct {
+  border-color: var(--correct);
+  background: rgba(34, 197, 94, 0.1);
+}
+
+.optBtn.correct .letter {
+  background: var(--correct);
+  color: white;
+}
+
+.optBtn.wrong {
+  border-color: var(--wrong);
+  background: rgba(239, 68, 68, 0.1);
+}
+
+.optBtn.wrong .letter {
+  background: var(--wrong);
+  color: white;
+}
+
+.optBtn.revealed {
+  border-color: var(--correct);
+  background: rgba(34, 197, 94, 0.06);
+}
+
+.optBtn.revealed .letter {
+  background: rgba(34, 197, 94, 0.3);
+}
+
+.letter {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: var(--border);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 700;
+  flex-shrink: 0;
+  transition: all 0.2s;
+}
+
+/* Feedback */
+.feedback {
+  margin-top: 16px;
+  padding: 12px 18px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  animation: fadeUp 0.3s ease;
+}
+
+.correctFb {
+  background: rgba(34, 197, 94, 0.12);
+  border: 1px solid rgba(34, 197, 94, 0.25);
+  color: #4ade80;
+}
+
+.wrongFb {
+  background: rgba(239, 68, 68, 0.12);
+  border: 1px solid rgba(239, 68, 68, 0.25);
+  color: #f87171;
+}
+
+.timeoutFb {
+  background: rgba(245, 158, 11, 0.12);
+  border: 1px solid rgba(245, 158, 11, 0.25);
+  color: #fbbf24;
+}
+
+.feedbackIcon { font-size: 16px; }
+
+/* Next button */
+.nextBtn {
+  width: 100%;
+  margin-top: 16px;
+  padding: 14px;
+  background: var(--surface2);
+  border: 1px solid var(--border2);
+  border-radius: 14px;
+  color: var(--text);
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  animation: fadeUp 0.3s ease;
+}
+
+.nextBtn:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  transform: translateY(-1px);
+}
+
+@media (max-width: 480px) {
+  .question { font-size: 17px; }
+}
