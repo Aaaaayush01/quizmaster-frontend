@@ -1,3 +1,4 @@
+import { decodeHTML } from "../utils/helpers";
 import React, { useState, useEffect, useCallback } from 'react';
 import styles from './QuizScreen.module.css';
 import { useTimer } from '../hooks/useTimer';
@@ -91,7 +92,7 @@ export default function QuizScreen({ questions, onFinish }) {
       feedbackMsg = streak > 1 ? `Correct! 🔥 ${streak} in a row!` : 'Correct! Well done!';
     } else {
       feedbackType = 'wrong';
-      feedbackMsg = `Wrong! The answer was: "${question.answer}"`;
+      feedbackMsg = `Wrong! The answer was: "${decodeHTML(question.answer)}"`;
     }
   }
 
@@ -117,7 +118,7 @@ export default function QuizScreen({ questions, onFinish }) {
       <div className={styles.badge}>{question.category}</div>
 
       {/* Question */}
-      <h2 className={styles.question}>{question.question}</h2>
+      <h2 className={styles.question}>{decodeHTML(question.question)}</h2>
 
       {/* Options */}
       <div className={styles.options}>
@@ -138,7 +139,7 @@ export default function QuizScreen({ questions, onFinish }) {
               disabled={answered}
             >
               <span className={styles.letter}>{LETTERS[i]}</span>
-              <span>{opt}</span>
+              <span>{decodeHTML(opt)}</span>
             </button>
           );
         })}

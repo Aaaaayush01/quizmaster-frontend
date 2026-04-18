@@ -1,7 +1,6 @@
+import he from "he";
 export function decodeHTML(str) {
-  const txt = document.createElement('textarea');
-  txt.innerHTML = str;
-  return txt.value;
+  return he.decode(str || "");
 }
 
 export function shuffle(arr) {
