@@ -36,16 +36,24 @@ export const DIFFICULTIES = [
 
 import API_BASE from "../config/api";
 
-export async function fetchQuestions({ category, difficulty, count }) {
-  const res = await fetch(
-    `${API_BASE}/api/questions?count=${count || 5}&category=${category || ""}&difficulty=${difficulty || ""}`
-  );
-
-  if (!res.ok) {
-    throw new Error("Backend fetch failed");
+async function fetchWithRetry(url, retries = 3) {
+  try {
+    const res = await fetch(url);
+    if (!res.ok) throw new Error();
+    return await res.json();
+  } catch (err) {
+    if (retries > 0) {
+      await new Promise(r => setTimeout(r, 2000));
+      return fetchWithRetry(url, retries - 1);
+    }
+    throw new Error("Failed to load questions");
   }
+}
 
-  return res.json();
+export async function fetchQuestions({ category, difficulty, count }) {
+  const url = `${API_BASE}/api/questions?count=${count || 5}&category=${category || ""}&difficulty=${difficulty || ""}`;
+
+  return fetchWithRetry(url);
 }
 
 export function getResultLabel(pct) {
