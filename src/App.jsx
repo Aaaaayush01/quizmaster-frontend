@@ -1,3 +1,4 @@
+import API_BASE from "./config/api";
 import React, { useState, useCallback } from 'react';
 import styles from './App.module.css';
 
@@ -54,10 +55,26 @@ export default function App() {
   }, [config, loadAndStart]);
 
   const handleFinish = useCallback((res) => {
-    setResult(res);
-    setStats(getStats()); // refresh after ResultScreen saves
-    setScreen(SCREEN.RESULT);
-  }, []);
+  // 🔥 SEND RESULT TO BACKEND
+  fetch(`${API_BASE}/api/submit`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      score: res.score,
+      total: res.total,
+    }),
+  })
+    .then(r => r.json())
+    .then(data => console.log("Saved:", data))
+    .catch(err => console.error("Save failed:", err));
+
+  // ✅ KEEP EXISTING LOGIC
+  setResult(res);
+  setStats(getStats());
+  setScreen(SCREEN.RESULT);
+}, []);
 
   const handlePlayAgain = useCallback(() => {
     loadAndStart(config);
