@@ -18,6 +18,9 @@ export default function QuizScreen({ questions, onFinish }) {
 
   const question = questions[currentQ];
 
+  console.log("RAW:", question?.question);
+console.log("DECODED:", decodeHTML(question?.question));
+
   const handleExpire = useCallback(() => {
     if (answered) return;
     setAnswered(true);
